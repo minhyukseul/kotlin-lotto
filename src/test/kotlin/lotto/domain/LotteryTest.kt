@@ -2,11 +2,6 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.AnnotationSpec
-import io.kotest.inspectors.shouldForAll
-import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.matchers.doubles.shouldBeLessThan
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.types.shouldBeTypeOf
 
 class LotteryTest : AnnotationSpec() {
 

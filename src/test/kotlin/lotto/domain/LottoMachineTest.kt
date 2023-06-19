@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.inspectors.shouldForAll
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.doubles.shouldBeLessThan
-import io.kotest.matchers.types.shouldBeTypeOf
+import io.kotest.matchers.shouldBe
 
 class LottoMachineTest : AnnotationSpec() {
 
@@ -54,11 +54,16 @@ class LottoMachineTest : AnnotationSpec() {
 
     @Test
     fun `당첨금을 계산해본다`() {
-        LottoMachine.buyLottery(14000, LotteryGroup())
+        val lotteries = mutableListOf<Lottery>()
+        repeat(1) {
+            lotteries.add(Lottery(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }))
+        }
+        val lotteryByHand = LotteryGroup(lotteries)
+        LottoMachine.buyLottery(1000, lotteryByHand)
         val winNumber = Lottery(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
         val bonusNumber = LottoNumber(7)
         LottoMachine.setWinLotto(winNumber, bonusNumber)
         val ranking = LottoMachine.generateRanking()
-        ranking.totalWinAmount.shouldBeTypeOf<Int>()
+        ranking.totalWinAmount shouldBe 2_000_000_000
     }
 }
